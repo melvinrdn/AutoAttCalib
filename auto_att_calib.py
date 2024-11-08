@@ -50,9 +50,10 @@ class AutoAttCalib:
         self.fig, self.ax, self.line = None, None, None
 
     def init_motor(self):
-        """Initialize the motor."""
+        """Initialize and home the motor."""
         try:
             self.motor = apt.Motor(int(self.motor_id))
+            self.motor.move_home(blocking=True)
             logging.info(f"Motor with ID {self.motor_id} initialized successfully.")
         except Exception as e:
             logging.warning(f"Failed to initialize motor with ID {self.motor_id}: {e}")
